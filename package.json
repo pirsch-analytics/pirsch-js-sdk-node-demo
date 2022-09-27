@@ -1,0 +1,22 @@
+{
+  "name": "pirsch-js-sdk-node-demo",
+  "version": "1.0.0",
+  "description": "Pirsch JS SDK Node Demo",
+  "main": "main.ts",
+  "scripts": {
+    "build": "tsc",
+    "demo": "npm run build && node dist/main.js"
+  },
+  "keywords": [
+    "pirsch",
+    "sdk",
+    "demo",
+    "node"
+  ],
+  "author": "Emvi Software GmbH",
+  "license": "MIT",
+  "dependencies": {
+    "pirsch-sdk": "^2.0.0",
+    "typescript": "^4.8.3"
+  }
+}
