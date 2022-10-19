@@ -1,4 +1,5 @@
-import { Pirsch, PirschDomain } from "pirsch-sdk";
+import { Pirsch } from "pirsch-sdk";
+import { PirschApiError } from "pirsch-sdk/common";
 
 const client = new Pirsch({
     hostname: "example.com",
@@ -9,23 +10,30 @@ const client = new Pirsch({
 client.domain().then(domain => {
     console.log(domain);
 
+    if (domain instanceof PirschApiError) {
+        console.error(domain.message);
+        return;
+    }
+
+    const { id } = domain;
+
     client.activeVisitors({
-        id: (domain as PirschDomain).id,
+        id,
         from: new Date("2022-09-01"),
         to: new Date("2022-09-27"),
         start: 0,
         scale: "day"
     }).then(stats => {
-        console.log(stats);
+        console.dir(stats, { depth: Infinity });
     });
 
     client.visitors({
-        id: (domain as PirschDomain).id,
+        id,
         from: new Date("2022-09-01"),
         to: new Date("2022-09-27"),
         start: 0,
         scale: "day"
     }).then(stats => {
-        console.log(stats);
+        console.dir(stats, { depth: Infinity });
     });
 });
